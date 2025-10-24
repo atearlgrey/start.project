@@ -7,8 +7,7 @@ interface EnvField {
 }
 
 interface Service {
-  id: string;
-  name: string;
+  container_name: string;
   image: string;
   env?: EnvField[];
   ports?: string[];
@@ -39,7 +38,7 @@ export const ServiceCard: React.FC<Props> = ({
     if(parsed.length === 1 && parsed[0] === "") {
       parsed.pop();
     }
-    onChange(service.id, key, parsed);
+    onChange(service.container_name, key, parsed);
   };
 
   return (
@@ -48,10 +47,10 @@ export const ServiceCard: React.FC<Props> = ({
         <input
           type="checkbox"
           checked={selected}
-          onChange={() => onToggle(service.id)}
+          onChange={() => onToggle(service.container_name)}
           className="accent-blue-500"
         />
-        <span className="font-semibold text-lg">{service.name}</span>
+        <span className="font-semibold text-lg">{service.container_name}</span>
       </label>
 
       {selected && (
@@ -63,7 +62,7 @@ export const ServiceCard: React.FC<Props> = ({
               <input
                 type="text"
                 value={values.image ?? service.image}
-                onChange={(ev) => onChange(service.id, "image", ev.target.value)}
+                onChange={(ev) => onChange(service.container_name, "image", ev.target.value)}
                 className="border p-1 w-full text-sm rounded"
               />
             </div>
@@ -77,7 +76,7 @@ export const ServiceCard: React.FC<Props> = ({
                 type="text"
                 value={values.command ?? service.command ?? ""}
                 onChange={(ev) =>
-                  onChange(service.id, "command", ev.target.value)
+                  onChange(service.container_name, "command", ev.target.value)
                 }
                 placeholder="e.g. mysqld --sql_mode="
                 className="border p-1 w-full text-sm rounded"
@@ -94,7 +93,7 @@ export const ServiceCard: React.FC<Props> = ({
                   type="text"
                   value={values[e.key] ?? e.default ?? ""}
                   onChange={(ev) =>
-                    onChange(service.id, e.key, ev.target.value)
+                    onChange(service.container_name, e.key, ev.target.value)
                   }
                   className="border p-1 w-full text-sm rounded"
                 />
