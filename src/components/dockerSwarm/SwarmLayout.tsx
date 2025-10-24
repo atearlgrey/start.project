@@ -54,7 +54,7 @@ export const SwarmLayout: React.FC<Props> = ({ services }) => {
     const yamlServices: Record<string, any> = {};
 
     selected.forEach((id) => {
-      const svc = services.find((s) => s.id === id);
+      const svc = services.find((s) => s.container_name === id);
       if (!svc) return;
 
       yamlServices[id] = { ...svc, ...serviceValues[id] };
@@ -108,12 +108,12 @@ export const SwarmLayout: React.FC<Props> = ({ services }) => {
       <div className="grid md:grid-cols-2 gap-4 mt-6">
         {services.map((s) => (
           <ServiceCard
-            key={s.id}
+            key={s.container_name}
             service={s}
-            selected={selected.includes(s.id)}
+            selected={selected.includes(s.container_name)}
             onToggle={toggleService}
             onChange={handleServiceChange}
-            values={serviceValues[s.id] || {}}
+            values={serviceValues[s.container_name] || {}}
           />
         ))}
       </div>

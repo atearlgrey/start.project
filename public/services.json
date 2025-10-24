@@ -1,7 +1,6 @@
 [
   {
-    "id": "mysql",
-    "name": "MySQL",
+    "container_name": "mysql",
     "image": "mysql:8.0",
     "env": [
       { "key": "MYSQL_ROOT_PASSWORD", "label": "Root Password", "default": "password" },
@@ -14,21 +13,18 @@
     "restart": "always"
   },
   {
-    "id": "redis",
-    "name": "Redis",
+    "container_name": "redis",
     "image": "redis:7.0",
     "ports": ["6379:6379"]
   },
   {
-    "id": "nginx",
-    "name": "Nginx",
+    "container_name": "nginx",
     "image": "nginx:latest",
     "ports": ["80:80"],
     "volumes": ["./nginx.conf:/etc/nginx/nginx.conf"]
   },
   {
-    "id": "af-manage-api",
-    "name": "AF Manage API",
+    "container_name": "af-manage-api",
     "image": "registry.gitlab.com/local-integration/finance-manage/af-manager-api:develop",
     "ports": ["9701:3000"],
     "env": [
@@ -42,8 +38,7 @@
     "depends_on": ["mysql", "redis"]
   },
   {
-    "id": "af-manage-fe",
-    "name": "AF Manage Frontend",
+    "container_name": "af-manage-fe",
     "image": "registry.gitlab.com/local-integration/finance-manage/af-manager-fe:develop",
     "ports": ["9702:80"],
     "env": [

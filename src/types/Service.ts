@@ -5,8 +5,7 @@ export interface EnvField {
 }
 
 export interface Service {
-  id: string;
-  name: string;
+  container_name: string;
   image: string;
   env?: EnvField[];
   ports?: string[];
