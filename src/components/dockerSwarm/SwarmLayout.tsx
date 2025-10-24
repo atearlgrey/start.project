@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const SwarmLayout: React.FC<Props> = ({ services }) => {
-  const [version, setVersion] = useState("3.8");
+  const [version] = useState("3.8");
   const [selected, setSelected] = useState<string[]>([]);
   const [serviceValues, setServiceValues] = useState<Record<string, Record<string, any>>>({});
   const [networks, setNetworks] = useState<string[]>(["swarm-net"]);

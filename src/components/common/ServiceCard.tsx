@@ -15,7 +15,7 @@ interface Service {
   volumes?: string[];
   networks?: string[];
   command?: string;
-  [key: string]: unknown; // cho phép field mở rộng (entrypoint, labels, depends_on…)
+  [key: string]: any; // cho phép field mở rộng (entrypoint, labels, depends_on…)
 }
 
 interface Props {
