@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { ServiceCard } from "../common/ServiceCard";
 import { GlobalConfig } from "../common/GlobalConfig";
-import { NetworkEditor } from "../common/NetworkEditor";
-import { VolumeEditor } from "../common/VolumeEditor";
 import { OutputViewer } from "../common/OutputViewer";
 import { PVCEditor } from "./PVC";
 import { generateK8SYAML } from "../../utils/generateK8SYAML";
