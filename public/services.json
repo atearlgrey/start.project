@@ -1,0 +1,54 @@
+[
+  {
+    "id": "mysql",
+    "name": "MySQL",
+    "image": "mysql:8.0",
+    "env": [
+      { "key": "MYSQL_ROOT_PASSWORD", "label": "Root Password", "default": "password" },
+      { "key": "MYSQL_DATABASE", "label": "Database", "default": "app_db" }
+    ],
+    "ports": ["3306:3306"],
+    "volumes": ["./mysql-data:/var/lib/mysql"],
+    "networks": ["app-network"],
+    "command": "--default-authentication-plugin=mysql_native_password",
+    "restart": "always"
+  },
+  {
+    "id": "redis",
+    "name": "Redis",
+    "image": "redis:7.0",
+    "ports": ["6379:6379"]
+  },
+  {
+    "id": "nginx",
+    "name": "Nginx",
+    "image": "nginx:latest",
+    "ports": ["80:80"],
+    "volumes": ["./nginx.conf:/etc/nginx/nginx.conf"]
+  },
+  {
+    "id": "af-manage-api",
+    "name": "AF Manage API",
+    "image": "registry.gitlab.com/local-integration/finance-manage/af-manager-api:develop",
+    "ports": ["9701:3000"],
+    "env": [
+      { "key": "DB_TYPE", "label": "Database Type", "default": "mysql" },
+      { "key": "DB_HOST", "label": "Database Host", "default": "mysql" },
+      { "key": "DB_PORT", "label": "Database Port", "default": "3306" },
+      { "key": "DB_NAME", "label": "Database Name", "default": "af_manage_db" },
+      { "key": "DB_USERNAME", "label": "Database Username", "default": "root" },
+      { "key": "DB_PASSWORD", "label": "Database Password", "default": "password" }
+    ],
+    "depends_on": ["mysql", "redis"]
+  },
+  {
+    "id": "af-manage-fe",
+    "name": "AF Manage Frontend",
+    "image": "registry.gitlab.com/local-integration/finance-manage/af-manager-fe:develop",
+    "ports": ["9702:80"],
+    "env": [
+      { "key": "END_POINT_API", "label": "Endpoint API URL", "default": "http://localhost:9701" }
+    ],
+    "depends_on": ["af-manage-api"]
+  }
+]
