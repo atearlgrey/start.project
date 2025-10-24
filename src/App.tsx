@@ -11,7 +11,7 @@ export default function App() {
   const [services, setServices] = useState<Service[]>([]);
 
   useEffect(() => {
-    fetch("/services.json")
+    fetch(`${import.meta.env.BASE_URL}/services.json`)
       .then((r) => r.json())
       .then(setServices);
 
