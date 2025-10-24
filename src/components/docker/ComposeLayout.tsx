@@ -137,7 +137,7 @@ export const ComposeLayout: React.FC<Props> = ({ services }) => {
       <OutputViewer
         output={output}
         onDownload={handleDownload}
-        provider="docker"
+        provider="compose"
       />
     </div>
   );
